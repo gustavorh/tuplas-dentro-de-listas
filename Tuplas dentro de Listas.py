@@ -3,12 +3,13 @@
 Created on Tue Nov 16 09:42:36 2021
 
 Nombre: Gustavo Reyes Herrera
-RUT: 21023531-0
+RUT: oculto
 
 Mis respuestas en este trabajo son propias, y están realizadas
 en conformidad con la formación ética de la universidad.
 
 """
+
 
 def producto_mas_caro(lista_productos):
     valor_mayor = 0
@@ -16,13 +17,14 @@ def producto_mas_caro(lista_productos):
     for i in lista_productos:
         # _ Ignorará dicho valor, en este caso: codigo, cantidad y mostrará solo el nombre y precio de la tupla
         _, nombre, precio, _ = i
-        
+
         if precio > valor_mayor:
             valor_mayor = precio
             nombre_mayor = nombre
-            
+
         return nombre_mayor
-    
+
+
 def valor_total_bodega(lista_productos):
     total = 0
     for i in lista_productos:
@@ -30,20 +32,22 @@ def valor_total_bodega(lista_productos):
         total += precio * cantidad
     return total
 
+
 def ingreso_total_por_ventas(lista_productos, lista_items):
     ingreso_total = 0
     for i in lista_items:
         _, codigo_i, cantidad = i
-        
+
         for j in lista_productos:
             codigo_j, _, precio, _ = j
-            
+
             if codigo_i == codigo_j:
                 ingreso_total += cantidad * precio
     return ingreso_total
 
 
-def ingreso_total_por_ventas2(lista_productos, lista_items): # Más eficiente con diccionarios
+# Más eficiente con diccionarios
+def ingreso_total_por_ventas2(lista_productos, lista_items):
     precios = {}
     for i in lista_productos:
         codigo, _, precio, _ = i
@@ -53,6 +57,7 @@ def ingreso_total_por_ventas2(lista_productos, lista_items): # Más eficiente co
         _, codigo_producto, cantidad = j
         total += precios[codigo_producto] * cantidad
     return total
+
 
 def productos_con_mas_ingresos(lista_productos, lista_items):
     codigos = {}
@@ -73,6 +78,7 @@ def productos_con_mas_ingresos(lista_productos, lista_items):
                 nombre_prod_mas_ingreso = nombre_prod
     return nombre_prod_mas_ingreso
 
+
 def cliente_que_mas_pago(lista_productos, lista_clientes, lista_ventas, lista_items):
     precios = {}
     for producto in lista_productos:
@@ -87,7 +93,7 @@ def cliente_que_mas_pago(lista_productos, lista_clientes, lista_ventas, lista_it
             if codigo_venta == cod_venta:
                 total_venta += precios[codigo_producto] * cantidad
         costo_cada_venta[codigo_venta] = total_venta
-        
+
     mejor_cliente = 0
     nombre_mejor_cliente = ""
     for cliente in lista_clientes:
@@ -102,42 +108,43 @@ def cliente_que_mas_pago(lista_productos, lista_clientes, lista_ventas, lista_it
             nombre_mejor_cliente = nombre
     return nombre_mejor_cliente, mejor_cliente
 
-productos = [ # Código, Nombre, Precio, Cantidad
-             (41419, "Fideos", 450, 38),
-             (70717, "Salsa de Tomate", 580, 40),
-             (78714, "Jabón", 730, 108),
-             (30877, "Desodorante", 2190, 17),
-             (47470, "Yoghurt", 99, 832),
-             (50809, "Palta", 500, 23),
-             (65466, "Galletas", 235, 0),
-             (33692, "Bebida", 650, 25)
-            ]
 
-clientes = [ # Rut, Nombre
-            ("24355132-7", "Pedro Díaz"),
-            ("12345341-0", "Elena Martinez"),
-            ("7765196-8", "Daniela Pérez")
-            ]
+productos = [  # Código, Nombre, Precio, Cantidad
+    (41419, "Fideos", 450, 38),
+    (70717, "Salsa de Tomate", 580, 40),
+    (78714, "Jabón", 730, 108),
+    (30877, "Desodorante", 2190, 17),
+    (47470, "Yoghurt", 99, 832),
+    (50809, "Palta", 500, 23),
+    (65466, "Galletas", 235, 0),
+    (33692, "Bebida", 650, 25)
+]
 
-ventas = [ # Venta N°, (Fecha), Rut
-            (1, (2021, 7, 12), "24355132-7"),
-            (2, (2021, 7, 19), "12345341-0"),
-            (3, (2021, 7, 30), "7765196-8"),
-            (4, (2021, 8, 1), "24355132-7"),
-            (5, (2021, 8, 13), "7765196-8"),
-            (6, (2021, 9, 11), "12345341-0")]
+clientes = [  # Rut, Nombre
+    ("24355132-7", "Pedro Díaz"),
+    ("12345341-0", "Elena Martinez"),
+    ("7765196-8", "Daniela Pérez")
+]
 
-items = [ # Venta N°, Código de Item, Cantidad
-            (1, 78714, 3),
-            (2, 41419, 4),
-            (2, 33692, 2),
-            (2, 47470, 6),
-            (3, 30877, 1),
-            (3, 41419, 1),
-            (4, 50809, 2),
-            (5, 41419, 2),
-            (5, 47470, 10),
-            (6, 41419, 2)]
+ventas = [  # Venta N°, (Fecha), Rut
+    (1, (2021, 7, 12), "24355132-7"),
+    (2, (2021, 7, 19), "12345341-0"),
+    (3, (2021, 7, 30), "7765196-8"),
+    (4, (2021, 8, 1), "24355132-7"),
+    (5, (2021, 8, 13), "7765196-8"),
+    (6, (2021, 9, 11), "12345341-0")]
+
+items = [  # Venta N°, Código de Item, Cantidad
+    (1, 78714, 3),
+    (2, 41419, 4),
+    (2, 33692, 2),
+    (2, 47470, 6),
+    (3, 30877, 1),
+    (3, 41419, 1),
+    (4, 50809, 2),
+    (5, 41419, 2),
+    (5, 47470, 10),
+    (6, 41419, 2)]
 
 mas_caro = producto_mas_caro(productos)
 total_bodega = valor_total_bodega(productos)
